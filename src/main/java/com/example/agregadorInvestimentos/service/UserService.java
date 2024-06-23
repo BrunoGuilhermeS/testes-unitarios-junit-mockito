@@ -37,7 +37,6 @@ public class UserService {
 		var userSaved = userRepository.save(entity);
 		return userSaved.getUserId();
 	}
-	//Buscar usuário pela iD
 	public Optional<User> getUserById(String userId) {
 		
 		return userRepository.findById(UUID.fromString(userId));

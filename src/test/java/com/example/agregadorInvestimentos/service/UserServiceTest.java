@@ -1,7 +1,7 @@
 package com.example.agregadorInvestimentos.service;
 
-import com.example.agregadorInvestimentos.controller.CreateUserDTO;
-import com.example.agregadorInvestimentos.controller.UpdateUserDTO;
+import com.example.agregadorInvestimentos.controller.dto.CreateUserDTO;
+import com.example.agregadorInvestimentos.controller.dto.UpdateUserDTO;
 import com.example.agregadorInvestimentos.entity.User;
 import com.example.agregadorInvestimentos.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;

@@ -1,0 +1,12 @@
+com\example\agregadorInvestimentos\controller\UserController.class
+com\example\agregadorInvestimentos\entity\StockAccountId.class
+com\example\agregadorInvestimentos\entity\Stock.class
+com\example\agregadorInvestimentos\repository\UserRepository.class
+com\example\agregadorInvestimentos\entity\User.class
+com\example\agregadorInvestimentos\AgredorInvestimentosApplication.class
+com\example\agregadorInvestimentos\entity\BillingAddress.class
+com\example\agregadorInvestimentos\entity\AccountStock.class
+com\example\agregadorInvestimentos\entity\Account.class
+com\example\agregadorInvestimentos\controller\UpdateUserDTO.class
+com\example\agregadorInvestimentos\controller\CreateUserDTO.class
+com\example\agregadorInvestimentos\service\UserService.class

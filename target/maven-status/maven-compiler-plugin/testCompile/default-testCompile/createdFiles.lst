@@ -1,0 +1,7 @@
+com\example\agredorInvestimentos\AgredorInvestimentosApplicationTests.class
+com\example\agregadorInvestimentos\service\UserServiceTest$createUser.class
+com\example\agregadorInvestimentos\service\UserServiceTest$listUser.class
+com\example\agregadorInvestimentos\service\UserServiceTest$getUserById.class
+com\example\agregadorInvestimentos\service\UserServiceTest$updateById.class
+com\example\agregadorInvestimentos\service\UserServiceTest$deleteById.class
+com\example\agregadorInvestimentos\service\UserServiceTest.class

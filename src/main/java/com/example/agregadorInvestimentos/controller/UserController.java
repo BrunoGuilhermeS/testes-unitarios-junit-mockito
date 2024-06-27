@@ -3,6 +3,9 @@ package com.example.agregadorInvestimentos.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.example.agregadorInvestimentos.controller.dto.CreateAccountDTO;
+import com.example.agregadorInvestimentos.controller.dto.CreateUserDTO;
+import com.example.agregadorInvestimentos.controller.dto.UpdateUserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,5 +61,11 @@ public class UserController {
 	public ResponseEntity<Void> deletById(@PathVariable("userId") String userId) {
 		userService.deleteById(userId);
 		return ResponseEntity.noContent().build();
+	}
+
+	@PostMapping("/{userId}/accounts")
+	public ResponseEntity<Void> createAccount(@PathVariable("userId") String userId, @RequestBody CreateAccountDTO createAccountDTO) {
+		userService.createAccount(userId, createAccountDTO);
+		return ResponseEntity.ok().build();
 	}
 }

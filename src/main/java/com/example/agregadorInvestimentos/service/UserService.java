@@ -1,27 +1,38 @@
 package com.example.agregadorInvestimentos.service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.sql.Update;
+import com.example.agregadorInvestimentos.controller.dto.CreateAccountDTO;
+import com.example.agregadorInvestimentos.entity.Account;
+import com.example.agregadorInvestimentos.entity.BillingAddress;
+import com.example.agregadorInvestimentos.repository.AccountRepository;
+import com.example.agregadorInvestimentos.repository.BillingAddressRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.example.agregadorInvestimentos.controller.CreateUserDTO;
-import com.example.agregadorInvestimentos.controller.UpdateUserDTO;
+import com.example.agregadorInvestimentos.controller.dto.CreateUserDTO;
+import com.example.agregadorInvestimentos.controller.dto.UpdateUserDTO;
 import com.example.agregadorInvestimentos.entity.User;
 import com.example.agregadorInvestimentos.repository.UserRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserService {
 	
 	private UserRepository userRepository;
+	private AccountRepository accountRepository;
+
+	private BillingAddressRepository billingAddressRepository;
 	
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, AccountRepository accountRepository, BillingAddressRepository billingAddressRepository) {
 		this.userRepository = userRepository;
-	}
+        this.accountRepository = accountRepository;
+        this.billingAddressRepository = billingAddressRepository;
+    }
 
 
 	public UUID createUser(CreateUserDTO createUserDTO) {
@@ -71,4 +82,29 @@ public class UserService {
 		}
 	}
 
+	public void createAccount(String userId, CreateAccountDTO createAccountDTO) {
+
+		var user =	userRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+		//DTO -> ENTITY
+
+				var account = new Account(
+				UUID.randomUUID(),
+				createAccountDTO.description(),
+				user,
+				null,
+						new ArrayList<>()
+		);
+
+			var accountCreated = accountRepository.save(account);
+
+			var billingAddress = new BillingAddress(
+					accountCreated.getAccountId(),
+					account,
+					createAccountDTO.street(),
+					createAccountDTO.number()
+			);
+
+			billingAddressRepository.save(billingAddress);
+	}
 }

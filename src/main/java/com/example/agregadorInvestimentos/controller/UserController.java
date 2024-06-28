@@ -3,6 +3,7 @@ package com.example.agregadorInvestimentos.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.example.agregadorInvestimentos.controller.dto.AccountResponseDto;
 import com.example.agregadorInvestimentos.controller.dto.CreateAccountDTO;
 import com.example.agregadorInvestimentos.controller.dto.CreateUserDTO;
 import com.example.agregadorInvestimentos.controller.dto.UpdateUserDTO;
@@ -66,6 +67,12 @@ public class UserController {
 	@PostMapping("/{userId}/accounts")
 	public ResponseEntity<Void> createAccount(@PathVariable("userId") String userId, @RequestBody CreateAccountDTO createAccountDTO) {
 		userService.createAccount(userId, createAccountDTO);
+		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/{userId}/accounts")
+	public ResponseEntity<List<AccountResponseDto>> listAccounts(@PathVariable("userId") String userId) {
+		var accounts = userService.listAccounts(userId);
 		return ResponseEntity.ok().build();
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.example.agregadorInvestimentos.controller.dto.AccountResponseDto;
 import com.example.agregadorInvestimentos.controller.dto.CreateAccountDTO;
 import com.example.agregadorInvestimentos.entity.Account;
 import com.example.agregadorInvestimentos.entity.BillingAddress;
@@ -106,5 +107,14 @@ public class UserService {
 			);
 
 			billingAddressRepository.save(billingAddress);
+	}
+
+	public List<AccountResponseDto> listAccounts(String userId) {
+		var user =	userRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+		return user.getAccounts()
+				.stream()
+				.map(ac -> new AccountResponseDto(ac.getAccountId().toString(), ac.getDescription()))
+				.toList();
 	}
 }
